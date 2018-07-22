@@ -8,7 +8,7 @@ import (
 	"github.com/garyburd/redigo/redis"
 	"github.com/globalsign/mgo"
 	"github.com/jinzhu/gorm"
-	"github.com/xuangua/gowxapisrv/config"
+	"github.com/xuangua/ylywgyApiServer/config"
 )
 
 // DB 数据库连接

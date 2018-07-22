@@ -9,8 +9,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/microcosm-cc/bluemonday"
-	"github.com/xuangua/gowxapisrv/controller/common"
-	"github.com/xuangua/gowxapisrv/model"
+	"github.com/xuangua/ylywgyApiServer/controller/common"
+	"github.com/xuangua/ylywgyApiServer/model"
 )
 
 // Save 保存分类（创建或更新）

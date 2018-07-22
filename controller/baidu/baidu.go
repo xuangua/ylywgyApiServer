@@ -9,9 +9,9 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	"github.com/xuangua/gowxapisrv/config"
-	"github.com/xuangua/gowxapisrv/controller/common"
-	"github.com/xuangua/gowxapisrv/model"
+	"github.com/xuangua/ylywgyApiServer/config"
+	"github.com/xuangua/ylywgyApiServer/controller/common"
+	"github.com/xuangua/ylywgyApiServer/model"
 )
 
 func postToBaidu(url string, data []byte) ([]byte, error) {

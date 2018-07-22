@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/gin-gonic/gin"
-	"github.com/xuangua/gowxapisrv/config"
-	"github.com/xuangua/gowxapisrv/model"
+	"github.com/xuangua/ylywgyApiServer/config"
+	"github.com/xuangua/ylywgyApiServer/model"
 )
 
 // RefreshTokenCookie 刷新过期时间

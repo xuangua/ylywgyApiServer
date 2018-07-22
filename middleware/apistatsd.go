@@ -8,8 +8,8 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/xuangua/gowxapisrv/config"
-	"github.com/xuangua/gowxapisrv/model"
+	"github.com/xuangua/ylywgyApiServer/config"
+	"github.com/xuangua/ylywgyApiServer/model"
 )
 
 func getReqPath(c *gin.Context) string {

@@ -9,7 +9,7 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	"github.com/xuangua/gowxapisrv/model"
+	"github.com/xuangua/ylywgyApiServer/model"
 )
 
 // Upload 文件上传

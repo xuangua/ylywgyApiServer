@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/globalsign/mgo/bson"
-	"github.com/xuangua/gowxapisrv/model"
-	"github.com/xuangua/gowxapisrv/utils"
+	"github.com/xuangua/ylywgyApiServer/model"
+	"github.com/xuangua/ylywgyApiServer/utils"
 )
 
 func yesterdayCron() {

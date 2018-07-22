@@ -11,9 +11,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
-	"github.com/xuangua/gowxapisrv/controller/common"
-	"github.com/xuangua/gowxapisrv/model"
-	"github.com/xuangua/gowxapisrv/utils"
+	"github.com/xuangua/ylywgyApiServer/controller/common"
+	"github.com/xuangua/ylywgyApiServer/model"
+	"github.com/xuangua/ylywgyApiServer/utils"
 )
 
 // List 查询投票列表

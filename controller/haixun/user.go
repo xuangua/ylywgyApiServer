@@ -1,4 +1,4 @@
-package user
+package haixun
 
 import (
 	"crypto/md5"

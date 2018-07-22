@@ -9,7 +9,7 @@ import (
 type WeAppUser struct {
 	OpenID    string `json:"openId"`
 	Nickname  string `json:"nickName"`
-	Gender    int    `json:"gender"`
+	Gender    uint    `json:"gender"`
 	AvatarURL string `json:"avatarUrl"`
 }
 

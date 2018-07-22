@@ -6,7 +6,7 @@ import (
     "log"
     "net"
 	"net/smtp"
-	"github.com/xuangua/gowxapisrv/config"
+	"github.com/xuangua/ylywgyApiServer/config"
 )
 
 // SendMail 发送邮件

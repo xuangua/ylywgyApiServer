@@ -9,7 +9,7 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/xuangua/gowxapisrv/utils"
+	"github.com/xuangua/ylywgyApiServer/utils"
 )
 
 var jsonData map[string]interface{}

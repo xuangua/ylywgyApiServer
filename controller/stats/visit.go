@@ -9,8 +9,8 @@ import (
 	"github.com/globalsign/mgo/bson"
 
 	"github.com/gin-gonic/gin"
-	"github.com/xuangua/gowxapisrv/controller/common"
-	"github.com/xuangua/gowxapisrv/model"
+	"github.com/xuangua/ylywgyApiServer/controller/common"
+	"github.com/xuangua/ylywgyApiServer/model"
 )
 
 // PV 增加一次页面访问

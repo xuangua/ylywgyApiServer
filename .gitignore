@@ -5,9 +5,8 @@
 
 vendor
 debug
-golang123
-golang123.exe
 gowxapisrv.exe
+ylywgyApiServer.exe
 config.json
 node_modules
 npm-debug.log

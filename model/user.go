@@ -9,12 +9,14 @@ import (
 	"time"
 
 	"github.com/garyburd/redigo/redis"
-	"github.com/xuangua/gowxapisrv/config"
+	"github.com/xuangua/ylywgyApiServer/config"
 )
 
 // User 用户
 type User struct {
 	ID           uint       `gorm:"primary_key" json:"id"`
+	Uid          string     `json:"uid"`
+	OpenId       string     `json:"openid"`
 	CreatedAt    time.Time  `json:"createdAt"`
 	UpdatedAt    time.Time  `json:"updatedAt"`
 	DeletedAt    *time.Time `sql:"index" json:"deletedAt"`
@@ -104,6 +106,62 @@ func UserToRedis(user User) error {
 		return errors.New("error")
 	}
 	return nil
+}
+
+// UserFromRedis 从redis中取出用户信息
+func UserFromRedisWithOpenId(openId string) (User, error) {
+	loginUser := fmt.Sprintf("%s%s", LoginUser, openId)
+
+	RedisConn := RedisPool.Get()
+	defer RedisConn.Close()
+
+	userBytes, err := redis.Bytes(RedisConn.Do("GET", loginUser))
+	if err != nil {
+		fmt.Println(err)
+		return User{}, errors.New("未登录")
+	}
+	var user User
+	bytesErr := json.Unmarshal(userBytes, &user)
+	if bytesErr != nil {
+		fmt.Println(bytesErr)
+		return user, errors.New("未登录")
+	}
+	return user, nil
+}
+
+// UserToRedis 将用户信息存到redis
+func UserToRedisWithOpenId(user User) error {
+	userBytes, err := json.Marshal(user)
+	if err != nil {
+		fmt.Println(err)
+		return errors.New("error")
+	}
+	loginUserKey := fmt.Sprintf("%s%s", LoginUser, user.OpenId)
+
+	RedisConn := RedisPool.Get()
+	defer RedisConn.Close()
+
+	if _, redisErr := RedisConn.Do("SET", loginUserKey, userBytes, "EX", config.ServerConfig.TokenMaxAge); redisErr != nil {
+		fmt.Println("redis set failed: ", redisErr.Error())
+		return errors.New("error")
+	}
+	return nil
+}
+
+// 从DB中取出用户信息，并更新到redis
+func UserFromDBWithOpenId(openId string) (User, error) {
+	var user User
+	if err := DB.Where("open_id = ?", openId).First(&user).Error; err != nil {
+		fmt.Println("failed get user from DB with openId", openId, err.Error())
+		return user, err
+	}
+
+	if err := UserToRedisWithOpenId(user); err != nil {
+		fmt.Println("failed to update user to Redis with openId", openId, err.Error())
+		return user, err
+	}
+
+	return user, nil
 }
 
 const (

@@ -2,8 +2,8 @@ package cron
 
 import (
 	"github.com/robfig/cron"
-	"github.com/xuangua/gowxapisrv/config"
-	"github.com/xuangua/gowxapisrv/model"
+	"github.com/xuangua/ylywgyApiServer/config"
+	"github.com/xuangua/ylywgyApiServer/model"
 )
 
 var cronMap = map[string]func(){}

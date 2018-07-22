@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/cactus/go-statsd-client/statsd"
-	"github.com/xuangua/gowxapisrv/config"
+	"github.com/xuangua/ylywgyApiServer/config"
 )
 
 // StatsdClient statsd 客户端

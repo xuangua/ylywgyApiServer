@@ -10,9 +10,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	"github.com/microcosm-cc/bluemonday"
-	"github.com/xuangua/gowxapisrv/controller/common"
-	"github.com/xuangua/gowxapisrv/model"
-	"github.com/xuangua/gowxapisrv/utils"
+	"github.com/xuangua/ylywgyApiServer/controller/common"
+	"github.com/xuangua/ylywgyApiServer/model"
+	"github.com/xuangua/ylywgyApiServer/utils"
 )
 
 // CreateCollect 收藏文章或收藏投票

@@ -4,8 +4,8 @@ import (
 	"strings"
     "unicode/utf8"
     "os"
-	"github.com/xuangua/gowxapisrv/config"
-	"github.com/xuangua/gowxapisrv/utils"
+	"github.com/xuangua/ylywgyApiServer/config"
+	"github.com/xuangua/ylywgyApiServer/utils"
     "github.com/satori/go.uuid"
 )
 

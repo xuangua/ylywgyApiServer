@@ -2,21 +2,22 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/xuangua/gowxapisrv/config"
-	"github.com/xuangua/gowxapisrv/controller/article"
-	"github.com/xuangua/gowxapisrv/controller/baidu"
-	"github.com/xuangua/gowxapisrv/controller/book"
-	"github.com/xuangua/gowxapisrv/controller/category"
-	"github.com/xuangua/gowxapisrv/controller/collect"
-	"github.com/xuangua/gowxapisrv/controller/comment"
-	"github.com/xuangua/gowxapisrv/controller/common"
-	"github.com/xuangua/gowxapisrv/controller/crawler"
-	"github.com/xuangua/gowxapisrv/controller/keyvalueconfig"
-	"github.com/xuangua/gowxapisrv/controller/message"
-	"github.com/xuangua/gowxapisrv/controller/stats"
-	"github.com/xuangua/gowxapisrv/controller/user"
-	"github.com/xuangua/gowxapisrv/controller/vote"
-	"github.com/xuangua/gowxapisrv/middleware"
+	"github.com/xuangua/ylywgyApiServer/config"
+	"github.com/xuangua/ylywgyApiServer/controller/article"
+	"github.com/xuangua/ylywgyApiServer/controller/baidu"
+	"github.com/xuangua/ylywgyApiServer/controller/book"
+	"github.com/xuangua/ylywgyApiServer/controller/category"
+	"github.com/xuangua/ylywgyApiServer/controller/collect"
+	"github.com/xuangua/ylywgyApiServer/controller/comment"
+	"github.com/xuangua/ylywgyApiServer/controller/common"
+	"github.com/xuangua/ylywgyApiServer/controller/crawler"
+	"github.com/xuangua/ylywgyApiServer/controller/haixun"
+	"github.com/xuangua/ylywgyApiServer/controller/keyvalueconfig"
+	"github.com/xuangua/ylywgyApiServer/controller/message"
+	"github.com/xuangua/ylywgyApiServer/controller/stats"
+	"github.com/xuangua/ylywgyApiServer/controller/user"
+	"github.com/xuangua/ylywgyApiServer/controller/vote"
+	"github.com/xuangua/ylywgyApiServer/middleware"
 )
 
 // Route 路由
@@ -26,7 +27,7 @@ func Route(router *gin.Engine) {
 	api := router.Group(apiPrefix, middleware.RefreshTokenCookie)
 	{
 		api.GET("/weAppLogin", user.WeAppLogin)
-		api.GET("/setWeAppUser", user.SetWeAppUserInfo)
+		api.POST("/setWeAppUser", user.LoginWithUserInfo)
 
 		api.GET("/siteinfo", common.SiteInfo)
 		api.POST("/signin", user.Signin)
@@ -164,6 +165,13 @@ func Route(router *gin.Engine) {
 		api.GET("/stats/visit", stats.PV)
 	}
 
+	wxapi := router.Group(apiPrefix, middleware.RefreshTokenCookie)
+	{
+		wxapi.GET("/v3/login", user.WeAppLogin)
+		wxapi.POST("/v3/login-with-user-info", middleware.WxSessionRequired, user.LoginWithUserInfo)
+		wxapi.GET("/v3/user-index", middleware.WxSessionRequired, user.GetWxUserInfo)
+	}
+
 	adminAPI := router.Group(apiPrefix+"/admin", middleware.RefreshTokenCookie, middleware.AdminRequired)
 	{
 		adminAPI.POST("/keyvalueconfig", keyvalueconfig.SetKeyValue)
@@ -189,5 +197,10 @@ func Route(router *gin.Engine) {
 		adminAPI.POST("/crawl/account", crawler.CreateAccount)
 
 		adminAPI.POST("/pushBaiduLink", baidu.PushToBaidu)
+	}
+
+	haixunErpAPI := router.Group(apiPrefix+"/apis/haixunerp", middleware.RefreshTokenCookie)
+	{
+		haixunErpAPI.POST("/apis/v1807g/account/login", haixun.Signin)
 	}
 }
