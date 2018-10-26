@@ -155,6 +155,37 @@
   revision = "c88ee250d0221a57af388746f5cf03768c21d6e2"
 
 [[projects]]
+  name = "github.com/zhufuyi/logger"
+  packages = ["."]
+  revision = "f6bf54d26c5206445a11785f69737078dd8927c4"
+  version = "v0.1"
+
+[[projects]]
+  name = "go.uber.org/atomic"
+  packages = ["."]
+  revision = "1ea20fb1cbb1cc08cbd0d913a96dead89aa18289"
+  version = "v1.3.2"
+
+[[projects]]
+  name = "go.uber.org/multierr"
+  packages = ["."]
+  revision = "3c4937480c32f4c13a875a1829af76c98ca3d40a"
+  version = "v1.1.0"
+
+[[projects]]
+  name = "go.uber.org/zap"
+  packages = [
+    ".",
+    "buffer",
+    "internal/bufferpool",
+    "internal/color",
+    "internal/exit",
+    "zapcore"
+  ]
+  revision = "ff33455a0e382e8a81d14dd7c922020b6b5e7982"
+  version = "v1.9.1"
+
+[[projects]]
   branch = "master"
   name = "golang.org/x/net"
   packages = [
@@ -189,6 +220,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "04401aa3cffcf528cf16c7127c1bc002a053aed0655ec08ddc8f17ede5daaf05"
+  inputs-digest = "1a6d53fdea8d0def7f4c28dea3314f48d66efb47c5f317e85606460ecc149b67"
   solver-name = "gps-cdcl"
   solver-version = 1

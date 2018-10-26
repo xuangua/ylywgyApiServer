@@ -14,6 +14,7 @@ import (
 	"github.com/xuangua/ylywgyApiServer/controller/haixun"
 	"github.com/xuangua/ylywgyApiServer/controller/keyvalueconfig"
 	"github.com/xuangua/ylywgyApiServer/controller/message"
+	"github.com/xuangua/ylywgyApiServer/controller/shopping"
 	"github.com/xuangua/ylywgyApiServer/controller/stats"
 	"github.com/xuangua/ylywgyApiServer/controller/user"
 	"github.com/xuangua/ylywgyApiServer/controller/vote"
@@ -197,6 +198,25 @@ func Route(router *gin.Engine) {
 		adminAPI.POST("/crawl/account", crawler.CreateAccount)
 
 		adminAPI.POST("/pushBaiduLink", baidu.PushToBaidu)
+	}
+
+	xuawuAPI := router.Group(apiPrefix + "/xuewu")
+	{
+		xuawuAPI.POST("/admin/login", user.Signin)
+		xuawuAPI.POST("/admin/signup", user.Signup)
+		xuawuAPI.POST("/admin/signout", middleware.SigninRequired, user.Signout)
+		xuawuAPI.GET("/admin/shopping/shopCategories", middleware.AdminRequired, shopping.GetShopCategoryList)
+		xuawuAPI.POST("/admin/shopping/addShop", middleware.AdminRequired, shopping.AddShop)
+		xuawuAPI.POST("/admin/shopping/updateShop", middleware.AdminRequired, shopping.UpdateShop)
+		xuawuAPI.DELETE("/admin/shopping/deleteShop/:shopId", middleware.AdminRequired, shopping.DeleteShop)
+		xuawuAPI.GET("/admin/shopping/getAdminUserShopList", middleware.AdminRequired, shopping.GetAdminUserShopList)
+		xuawuAPI.GET("/admin/shopping/getShopCount", middleware.AdminRequired, shopping.GetAdminUserTotalShopCount)
+
+		xuawuAPI.POST("/admin/shopping/addFood", middleware.AdminRequired, shopping.AddFood)
+		xuawuAPI.POST("/admin/shopping/updateFood", middleware.AdminRequired, shopping.UpdateFood)
+		xuawuAPI.DELETE("/admin/shopping/deleteFood/:shopId", middleware.AdminRequired, shopping.DeleteFood)
+
+		// xuawuAPI.POST("/shoping/categories/create", shopping.CreateBookCategory)
 	}
 
 	haixunErpAPI := router.Group(apiPrefix+"/apis/haixunerp", middleware.RefreshTokenCookie)

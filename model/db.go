@@ -60,14 +60,23 @@ func initMongo() {
 	if config.MongoConfig.URL == "" {
 		return
 	}
-	session, err := mgo.Dial(config.MongoConfig.URL)
-	if err != nil {
-		fmt.Println(err.Error())
-		os.Exit(-1)
+	if config.MongoConfig.Database == "" {
+		return
 	}
-	// Optional. Switch the session to a monotonic behavior.
-	session.SetMode(mgo.Monotonic, true)
-	MongoDB = session.DB(config.MongoConfig.Database)
+
+	// session, err := mgo.Dial(config.MongoConfig.URL)
+	// if err != nil {
+	// 	fmt.Println(err.Error())
+	// 	os.Exit(-1)
+	// }
+	// // Optional. Switch the session to a monotonic behavior.
+	// session.SetMode(mgo.Monotonic, true)
+	// MongoDB = session.DB(config.MongoConfig.Database)
+
+	err := InitializeMongodb(config.MongoConfig.URL, config.MongoConfig.Database)
+	if err != nil {
+		panic(err)
+	}
 }
 
 func init() {

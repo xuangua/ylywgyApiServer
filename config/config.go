@@ -31,6 +31,8 @@ func initJSON() {
 		fmt.Println("invalid config: ", err.Error())
 		os.Exit(-1)
 	}
+
+	// fmt.Println(jsonData)
 }
 
 type dBConfig struct {
@@ -75,8 +77,13 @@ func initRedis() {
 }
 
 type mongoConfig struct {
-	URL      string
+	Dialect  string
 	Database string
+	User     string
+	Password string
+	Host     string
+	Port     int
+	URL      string
 }
 
 // MongoConfig mongodb相关配置
@@ -84,6 +91,10 @@ var MongoConfig mongoConfig
 
 func initMongo() {
 	utils.SetStructByJSON(&MongoConfig, jsonData["mongodb"].(map[string]interface{}))
+	url := fmt.Sprintf("%s://%s:%s@%s:%d/%s",
+		MongoConfig.Dialect, MongoConfig.User, MongoConfig.Password, MongoConfig.Host, MongoConfig.Port, MongoConfig.Database)
+	MongoConfig.URL = url
+	fmt.Println(MongoConfig.URL)
 }
 
 type serverConfig struct {

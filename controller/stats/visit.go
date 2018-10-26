@@ -48,9 +48,13 @@ func PV(c *gin.Context) {
 		return
 	}
 
-	if err := model.MongoDB.C("userVisit").Insert(&userVisit); err != nil {
+	// get a new mgo session
+	mgoConn := model.GetMgoSession()
+	defer mgoConn.Close()
+
+	if err := mgoConn.WithLog().Insert("userVisit", &userVisit); err != nil {
 		fmt.Println(err)
-		SendErrJSON("error.", c)
+		SendErrJSON("update visit staticist failed.", c)
 		return
 	}
 
