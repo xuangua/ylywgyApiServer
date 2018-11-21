@@ -7,6 +7,8 @@ export default {
         return result ? JSON.parse(result) : null
     },
     setItem: (key, value) => {
+        console.log(key)
+        console.log(value)
         if (!value) {
             return
         }

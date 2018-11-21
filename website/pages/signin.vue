@@ -1,7 +1,7 @@
 <template>
     <Row type="flex" align="middle" justify="center" class="golang-signin-container">
         <Col :xs="24" :lg="6" :md="14">
-            <a class="golang-signin-title" href="/">GOLANG123</a>
+            <a class="golang-signin-title" href="/">xuangua</a>
             <p class="golang-signin-desc">和地鼠们分享你的知识、经验和见解</p>
         	<Form ref="formCustom" :model="formCustom" :rules="ruleCustom" class="signup-form">
         		<Form-item prop="username">
@@ -36,6 +36,8 @@
     import config from '~/config'
     import url from 'url'
     import {trim, trimBlur} from '~/utils/tool'
+    import storage from '~/utils/storage'
+    import cookie from '~/utils/cookie'
 
     export default {
         data () {
@@ -46,6 +48,16 @@
                 formCustom: {
                     passwd: '',
                     username: ''
+                },
+                loginUser: {
+                    query: {
+                        loginType: ''
+                    },
+                    body: {
+                        signinInput: '',
+                        password: '',
+                        luosimaoRes: ''
+                    }
                 },
                 success: false,
                 ruleCustom: {
@@ -95,12 +107,27 @@
         },
         methods: {
             handleSubmit (name) {
+                console.log('name ' + name)
                 this.$refs[name].validate((valid) => {
+                    console.log('valid ' + valid)
+                    console.log('this.loading ' + this.loading)
                     if (valid) {
                         if (this.loading) {
                             return
                         }
                         this.loading = true
+                        this.loginUser.query.loginType = this.formCustom.username.indexOf('@') > 0 ? 'email' : 'username'
+                        console.log('this.loginUser.query.loginType ' + this.loginUser.query.loginType)
+                        this.loginUser.body = {
+                            signinInput: trim(this.formCustom.username),
+                            password: trim(this.formCustom.passwd),
+                            luosimaoRes: this.luosimaoRes
+                        }
+
+                        console.log('loginUser.body.signinInput ' + this.loginUser.body.signinInput)
+                        console.log('loginUser.body.password ' + this.loginUser.body.password)
+                        console.log('loginUser.body.luosimaoRes ' + this.loginUser.body.luosimaoRes)
+
                         request.signin({
                             query: {
                                 loginType: this.formCustom.username.indexOf('@') > 0 ? 'email' : 'username'
@@ -113,6 +140,18 @@
                         }).then(res => {
                             this.loading = false
                             if (res.errNo === ErrorCode.SUCCESS) {
+                                console.log(res.data)
+                                // context.store.commit('user', res.data.user)
+                                storage.setItem('use', res.data.user)
+                                storage.setItem(config.tokenCookieName, res.data.token)
+                                cookie.setCookie(config.tokenCookieName, res.data.token)
+
+                                // let tokenName = 'token'
+                                // let tokenString = res.data.token
+                                // let maxAge = config.tokenMaxAge
+                                // let tokenCookie = `${tokenName}=${tokenString}; Max-Age=${maxAge}; Path=/; HttpOnly; Secure`
+                                // res.setHeader('Set-Cookie', tokenCookie)
+
                                 window.location.href = this.redirectURL
                             } else if (res.errNo === ErrorCode.IN_ACTIVE) {
                                 window.location.href = '/verify/mail?e=' + encodeURIComponent(res.data.email)

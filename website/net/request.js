@@ -49,6 +49,19 @@ function send (key, options) {
             axiosConfig.proxy = config.proxy
         }
         let client = options.client
+
+        if (typeof window === 'undefined') {
+            console.log('window undefined')
+        } else {
+            console.log(window)
+        }
+
+        if (client && client.headers && client.headers['cookie']) {
+            console.log(client.headers['cookie'])
+        } else {
+            console.log('client.headers cookie null')
+        }
+
         if (typeof window === 'undefined' && !client) {
             throw new Error(key + ': client不能为空')
         }
@@ -64,6 +77,10 @@ function send (key, options) {
         if (theConfig.method === 'post' || theConfig.method === 'put') {
             axiosConfig.data = options.body
         }
+
+        // console.log('axiosConfig.method ' + axiosConfig.method)
+        // console.log('axiosConfig.url ' + axiosConfig.url)
+        // console.log('axiosConfig.data ' + axiosConfig.data)
 
         var startTime = new Date().getTime()
         axios(axiosConfig)
@@ -84,6 +101,7 @@ function send (key, options) {
 
 for (let key in apiConfig) {
     if (apiConfig.hasOwnProperty(key)) {
+        console.log(req[key])
         req[key] = (options) => {
             return send(key, options)
         }

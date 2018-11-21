@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import getters from './getters'
+// import mutations from './mutations'
+import actions from './actions'
 
 Vue.use(Vuex)
 
@@ -29,8 +32,21 @@ const store = () => new Vuex.Store({
         maxBrowseVisible: true,
         maxCommentVisible: true,
         friendLinkVisible: false,
-        statVisible: false
+        statVisible: false,
+        token: '',
+        githubToken: '',
+        // user: {},
+        total: 0,
+        articles: [],
+        tags: [],
+        tagArticles: [], // 标签下的文章列表
+        searchArticles: [],
+        archives: [],
+        githubApi: {
+            userInfo: 'https://api.github.com/user?access_token='
+        }
     },
+    getters,
     mutations: {
         siteConfig (state, siteConfig) {
             state.siteConfig = siteConfig
@@ -102,8 +118,34 @@ const store = () => new Vuex.Store({
         },
         replyCount (state, replyCount) {
             state.replyCount = replyCount
+        },
+        SET_TOKEN (state, token) {
+            state.token = token
+        },
+        SET_GITHUB_TOKEN (state, token) {
+            state.githubToken = token
+        },
+        SET_USER (state, data) {
+            state.user = data.data
+        },
+        SET_ARTICLES (state, data) {
+            state.articles = state.articles.concat(data.data)
+            state.total = data.total
+        },
+        SET_TAGS (state, data) {
+            state.tags = data.data
+        },
+        SET_TAG_ARTICLES (state, data) {
+            state.tagArticles = data.data
+        },
+        SET_ARCHVES (state, data) {
+            state.archives = data.data
+        },
+        SET_SEARCH (state, data) {
+            state.searchArticles = data.data
         }
-    }
+    },
+    actions
 })
 
 export default store

@@ -39,6 +39,14 @@ type User struct {
 	Status       int        `json:"status"`
 	Schools      []School   `json:"schools"` //教育经历
 	Careers      []Career   `json:"careers"` //职业经历
+	ShipAddr     string     `json:"ship_addr"`
+	Points        int        `json:"points"`
+	Nickname   string   `json:"nickname"`
+	Province   string   `json:"province"`
+	City       string   `json:"city"`
+	Country    string   `json:"country"`
+	HeadImgURL string   `json:"headimgurl"`
+	Unionid    string   `json:"unionid"`
 }
 
 // CheckPassword 验证密码是否正确
@@ -166,7 +174,7 @@ func UserFromDBWithOpenId(openId string) (User, error) {
 
 const (
 	// UserRoleNormal 普通用户
-	UserRoleNormal = 1
+	UserRoleNormal = 1  // customer
 
 	// UserRoleEditor 网站编辑
 	UserRoleEditor = 2

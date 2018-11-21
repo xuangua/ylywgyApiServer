@@ -47,17 +47,17 @@ func SaveShopCategory(c *gin.Context, isEdit bool) {
     }
 
     // if category.Sequence < minOrder || category.Sequence > maxOrder {
-    // 	msg := "分类的排序要在" + strconv.Itoa(minOrder) + "到" + strconv.Itoa(maxOrder) + "之间"
-    // 	SendErrJSON(msg, c)
-    // 	return
+    //  msg := "分类的排序要在" + strconv.Itoa(minOrder) + "到" + strconv.Itoa(maxOrder) + "之间"
+    //  SendErrJSON(msg, c)
+    //  return
     // }
 
     // if category.ParentID != 0 {
-    // 	var parentCate model.ShopCategory
-    // 	if err := model.DB.First(&parentCate, category.ParentID).Error; err != nil {
-    // 		SendErrJSON("无效的父分类", c)
-    // 		return
-    // 	}
+    //  var parentCate model.ShopCategory
+    //  if err := model.DB.First(&parentCate, category.ParentID).Error; err != nil {
+    //      SendErrJSON("无效的父分类", c)
+    //      return
+    //  }
     // }
 
     var updatedCategory model.ShopCategory
@@ -70,21 +70,21 @@ func SaveShopCategory(c *gin.Context, isEdit bool) {
         }
     }
     // } else {
-    // 	//更新分类
-    // 	if err := model.DB.First(&updatedCategory, category.ID).Error; err == nil {
-    // 		updateMap := make(map[string]interface{})
-    // 		updateMap["name"] = category.Name
-    // 		// updateMap["sequence"] = category.Sequence
-    // 		// updateMap["parent_id"] = category.ParentID
-    // 		if err := model.DB.Model(&updatedCategory).Updates(updateMap).Error; err != nil {
-    // 			fmt.Println(err.Error())
-    // 			SendErrJSON("error", c)
-    // 			return
-    // 		}
-    // 	} else {
-    // 		SendErrJSON("无效的分类id", c)
-    // 		return
-    // 	}
+    //  //更新分类
+    //  if err := model.DB.First(&updatedCategory, category.ID).Error; err == nil {
+    //      updateMap := make(map[string]interface{})
+    //      updateMap["name"] = category.Name
+    //      // updateMap["sequence"] = category.Sequence
+    //      // updateMap["parent_id"] = category.ParentID
+    //      if err := model.DB.Model(&updatedCategory).Updates(updateMap).Error; err != nil {
+    //          fmt.Println(err.Error())
+    //          SendErrJSON("error", c)
+    //          return
+    //      }
+    //  } else {
+    //      SendErrJSON("无效的分类id", c)
+    //      return
+    //  }
 
     var categoryJSON model.ShopCategory
     if isEdit {
@@ -129,16 +129,16 @@ func GetShopCategoryList(c *gin.Context) {
     }
 
     // if model.DB.Order("sequence asc").Find(&categories).Error != nil {
-    // 	SendErrJSON("error", c)
-    // 	return
+    //  SendErrJSON("error", c)
+    //  return
     // }
 
     // c.JSON(http.StatusOK, gin.H{
-    // 	"errNo": model.ErrorCode.SUCCESS,
-    // 	"msg":   "success",
-    // 	"data": gin.H{
-    // 		"categories": categories,
-    // 	},
+    //  "errNo": model.ErrorCode.SUCCESS,
+    //  "msg":   "success",
+    //  "data": gin.H{
+    //      "categories": categories,
+    //  },
     // })
     c.JSON(http.StatusOK, categories)
 }

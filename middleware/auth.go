@@ -32,6 +32,7 @@ func getUser(c *gin.Context) (model.User, error) {
 	}
 
 	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+		// fmt.Printf("claims: %v\n", claims)
 		userID := int(claims["id"].(float64))
 		var err error
 		user, err = model.UserFromRedis(userID)

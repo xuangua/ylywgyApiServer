@@ -2,6 +2,7 @@ import config from '~/config'
 
 export default {
     refreshTokenCookie: (req, res) => {
+        console.log('cookie.refreshTokenCookie')
         let cookies = req.headers['cookie']
         if (cookies) {
             var theCookieArr = cookies.split(/;\s?/)
@@ -18,6 +19,7 @@ export default {
         }
     },
     getCookie: (key) => {
+        console.log('cookie.getCookie')
         let c = document.cookie || ''
         let cookies = c.split(';')
         for (let i = 0; i < cookies.length; i++) {
@@ -31,6 +33,7 @@ export default {
         return ''
     },
     setCookie: (key, value, day) => {
+        console.log('cookie.setCookie')
         day = day || 36500
         let expires = ''
         let date = new Date(new Date().getTime() + day * 24 * 60 * 60 * 1000)

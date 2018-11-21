@@ -1,6 +1,7 @@
 import request from '~/net/request'
 
 export default function (context, next) {
+    // console.log(context.req)
     Promise.all([
         request.getSiteInfo({client: context.req}),
         request.getUserInfo({client: context.req}),

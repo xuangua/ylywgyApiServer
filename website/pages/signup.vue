@@ -4,14 +4,14 @@
             <div class="signup-head-content">
                 <a href="/">
                     <img src="~assets/images/logo.png" alt="">
-                    <span>Golang123</span>
+                    <span>xuangua</span>
                 </a>
             </div>
         </div>
         <div class="signup-box">
             <div class="signup-nav">
                 <span class="title">{{!success ? '账号注册' : '邮箱验证' }}</span>
-                <span class="desc">{{!success ? '如果您有Golang123账号' : '如果您已经完成验证'}}，那么可以<a href="/signin">登录</a></span>
+                <span class="desc">{{!success ? '如果您有xuangua账号' : '如果您已经完成验证'}}，那么可以<a href="/signin">登录</a></span>
             </div>
     		<Form v-show="isMounted" ref="formCustom" :model="formCustom" :rules="ruleCustom" :label-width="80" class="signup-form" v-if="!success" style="height: 500px">
     			<Form-item label="用户名" prop="username">

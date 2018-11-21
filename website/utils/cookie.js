@@ -31,6 +31,7 @@ export default {
         return ''
     },
     setCookie: (key, value, day) => {
+        console.log('cookie.setCookie')
         day = day || 36500
         let expires = ''
         let date = new Date(new Date().getTime() + day * 24 * 60 * 60 * 1000)

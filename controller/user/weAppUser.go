@@ -30,7 +30,7 @@ func WeAppLogin(ctx *gin.Context) {
 		return
 	}
 	appID := config.WeAppConfig.AppID
-	secret := config.WeAppConfig.Secret
+	secret := config.WeAppConfig.AppSecret
 	CodeToSessURL := config.WeAppConfig.CodeToSessURL
 	CodeToSessURL = strings.Replace(CodeToSessURL, "{appid}", appID, -1)
 	CodeToSessURL = strings.Replace(CodeToSessURL, "{secret}", secret, -1)

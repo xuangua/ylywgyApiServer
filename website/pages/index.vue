@@ -1,5 +1,10 @@
 <template>
-    <div>
+  <div class="index container" v-scroll="onLoad">
+    <top-list :articles="$store.state.articles" />
+    <p v-if="isLoading" class="load-tip">加载中...</p>
+    <p v-if="noMore" class="load-tip">没有更多文章了</p>
+  </div>
+    <!-- <div>
         <div class="home-categoties-box">
             <a href="/" class="categoties-item" :class="{'categoties-select': !cate}">全部</a>
             <a v-for="cateItem in categories" class="categoties-item" :href="'/?cate=' + cateItem.id" :class="{'categoties-select': cateItem.id == cate}">{{cateItem.name}}</a>
@@ -33,7 +38,7 @@
             </div>
         </div>
         <baidu-banner900x110 />
-    </div>
+    </div> -->
 </template>
 
 <script>
@@ -43,6 +48,13 @@
     import baiduBanner900x110 from '~/components/ad/baidu/banner900x110'
 
     export default {
+        data () {
+            return {
+                page: 1,
+                isLoading: false,
+                noMore: false
+            }
+        },
         asyncData (context) {
             context.store.commit('top10Visible', true)
             context.store.commit('friendLinkVisible', true)
@@ -108,7 +120,67 @@
         methods: {
             onPageChange (value) {
                 window.location.href = `/?cate=${this.cate}&pageNo=${value}`
+            },
+            async onLoad () {
+                // 没有正在加载中
+                if (!this.isLoading) {
+                    if (this.$store.state.articles.length < this.$store.state.total) {
+                        this.isLoading = true
+                        this.page++
+                        await this.$store.dispatch('ARTICLES', this.page)
+                        this.isLoading = false
+                    } else {
+                        this.noMore = true
+                        return false
+                    }
+                } else {
+                    return false
+                }
             }
+            // onLoad () {
+            //     // 没有正在加载中
+            //     if (!this.isLoading) {
+            //         if (this.$store.state.articles.length < this.$store.state.total) {
+            //             this.isLoading = true
+            //             this.page++
+            //             // await this.$store.dispatch('ARTICLES', this.page)
+            //             request.getArticles({
+            //                 // client: context.req,
+            //                 query: {
+            //                     // cateId: query.cate || '',
+            //                     pageNo: this.page || 1
+            //                     // noContent: 'true'
+            //                 }
+            //             }).then(res => {
+            //                 // this.isLoading = false
+            //                 // if (res.errNo === ErrorCode.SUCCESS) {
+            //                 //     window.location.href = this.redirectURL
+            //                 // } else if (res.errNo === ErrorCode.IN_ACTIVE) {
+            //                 //     window.location.href = '/verify/mail?e=' + encodeURIComponent(res.data.email)
+            //                 // } else {
+            //                 //     // 没有配置luosimaoSiteKey的话，就没有验证码功能
+            //                 //     this.luosimaoSiteKey && window.LUOCAPTCHA.reset()
+            //                 //     this.$Message.error({
+            //                 //         duration: config.messageDuration,
+            //                 //         closable: true,
+            //                 //         content: res.msg
+            //                 //     })
+            //                 // }
+            //                 this.isLoading = false
+            //             }).catch(err => {
+            //                 this.isLoading = false
+            //                 console.log(err.message)
+            //                 // context.error({ message: 'Not Found', statusCode: 404 })
+            //             })
+            //             this.isLoading = false
+            //         } else {
+            //             this.noMore = true
+            //             return false
+            //         }
+            //     } else {
+            //         return false
+            //     }
+            // }
         },
         mounted () {
             console.log('golang123')

@@ -14,6 +14,12 @@
   version = "v1.0.0"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/bradfitz/gomemcache"
+  packages = ["memcache"]
+  revision = "bc664df9673713a0ccf26e3b55a673ec7301088b"
+
+[[projects]]
   name = "github.com/cactus/go-statsd-client"
   packages = ["statsd"]
   revision = "138b925ccdf617776955904ba7759fce64406cec"
@@ -84,6 +90,15 @@
   revision = "5a0f697c9ed9d68fef0116532c6e05cfeae00e55"
 
 [[projects]]
+  name = "github.com/gomodule/redigo"
+  packages = [
+    "internal",
+    "redis"
+  ]
+  revision = "9c11da706d9b7902c6da69c592f75637793fe121"
+  version = "v2.0.0"
+
+[[projects]]
   name = "github.com/gorilla/context"
   packages = ["."]
   revision = "08b5f424b9271eedf6f9f0ce86cb9396ed337a42"
@@ -148,6 +163,26 @@
   packages = ["."]
   revision = "f58768cc1a7a7e77a3bd49e98cdd21419399b6a3"
   version = "v1.2.0"
+
+[[projects]]
+  name = "github.com/silenceper/wechat"
+  packages = [
+    ".",
+    "cache",
+    "context",
+    "js",
+    "material",
+    "menu",
+    "message",
+    "oauth",
+    "pay",
+    "server",
+    "template",
+    "user",
+    "util"
+  ]
+  revision = "90aabb3dd638f070d0e1cec93192df238c15a393"
+  version = "v1.0.0"
 
 [[projects]]
   name = "github.com/ugorji/go"
@@ -220,6 +255,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "1a6d53fdea8d0def7f4c28dea3314f48d66efb47c5f317e85606460ecc149b67"
+  inputs-digest = "c009a32d04f22201ea27aa6da7f9b021626560f1467a8076736fa7a4ba7b5b0c"
   solver-name = "gps-cdcl"
   solver-version = 1

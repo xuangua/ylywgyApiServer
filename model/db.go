@@ -72,10 +72,17 @@ func initMongo() {
 	// // Optional. Switch the session to a monotonic behavior.
 	// session.SetMode(mgo.Monotonic, true)
 	// MongoDB = session.DB(config.MongoConfig.Database)
-
-	err := InitializeMongodb(config.MongoConfig.URL, config.MongoConfig.Database)
-	if err != nil {
-		panic(err)
+	for i:=0; i<=60; i++ {
+		err := InitializeMongodb(config.MongoConfig.URL, config.MongoConfig.Database)
+		if err != nil {
+			// panic(err)
+			time.Sleep(1000 * time.Millisecond)
+		} else {
+			break;
+		}
+		if i==60 {
+			panic(err)
+		}
 	}
 }
 
